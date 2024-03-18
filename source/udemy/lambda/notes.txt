@@ -1,0 +1,8 @@
+Predicate<T> - boolean test(T t). Use in remove if, filter something.
+Also we can combine our predicates using .and(). Additionally .or() .negate()
+
+Supplier<T> - T get(). Returns our object of type T
+
+Consumer<T> - void accept(T t). Accepts some object, and modify it;
+
+Function<T, R> - R apply (T t)/ Accepts some object of T, do something and return result with type R

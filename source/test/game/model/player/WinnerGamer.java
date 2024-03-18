@@ -19,13 +19,22 @@ public class WinnerGamer extends Gamer implements WinnerAble {
         this.oppositeGamer = oppositeGamer;
     }
 
+    public WinnerGamer(
+            String name,
+            int age,
+            int experienceInDay,
+            double luckyLevel
+    ) {
+        super(name, age, experienceInDay, luckyLevel);
+    }
+
     @Override
     public GameItem play() {
-        return winDuel(oppositeGamer);
+        return winDuel(this.oppositeGamer);
     }
 
     public GameItem getOppositeGamer() {
-        return oppositeGamer;
+        return this.oppositeGamer;
     }
 
     public void setOppositeGamer(GameItem oppositeGamer) {

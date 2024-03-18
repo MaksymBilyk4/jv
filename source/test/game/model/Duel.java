@@ -1,24 +1,30 @@
 package test.game.model;
 
-import java.util.HashMap;
+import test.game.model.player.Gamer;
+import test.game.model.player.WinnerGamer;
 
-public class Duel<G1, G2> {
+public class Duel {
 
     private int roundCount;
     private int currentRound = 0;
 
-    private G1 firstGamer;
+    private Gamer firstGamer;
     private int firstGamerScore = 0;
 
-    private G2 secondGamer;
+    private Gamer secondGamer;
     private int secondGamerScore = 0;
 
 
-    public Duel(int roundCount, G1 firstGamer, G2 secondGamer) {
+    public Duel(int roundCount, Gamer firstGamer, Gamer secondGamer) {
         this.roundCount = roundCount;
         this.firstGamer = firstGamer;
         this.secondGamer = secondGamer;
     }
+
+//    public Gamer () {
+//
+//    }
+    
 
     public int getRoundCount() {
         return roundCount;
@@ -36,11 +42,11 @@ public class Duel<G1, G2> {
         this.currentRound = currentRound;
     }
 
-    public G1 getFirstGamer() {
+    public Gamer getFirstGamer() {
         return firstGamer;
     }
 
-    public void setFirstGamer(G1 firstGamer) {
+    public void setFirstGamer(Gamer firstGamer) {
         this.firstGamer = firstGamer;
     }
 
@@ -52,11 +58,11 @@ public class Duel<G1, G2> {
         this.firstGamerScore = firstGamerScore;
     }
 
-    public G2 getSecondGamer() {
+    public Gamer getSecondGamer() {
         return secondGamer;
     }
 
-    public void setSecondGamer(G2 secondGamer) {
+    public void setSecondGamer(Gamer secondGamer) {
         this.secondGamer = secondGamer;
     }
 
@@ -66,5 +72,17 @@ public class Duel<G1, G2> {
 
     public void setSecondGamerScore(int secondGamerScore) {
         this.secondGamerScore = secondGamerScore;
+    }
+
+    @Override
+    public String toString() {
+        return "Duel{" +
+                "roundCount=" + roundCount +
+                ", currentRound=" + currentRound +
+                ", firstGamer=" + firstGamer +
+                ", firstGamerScore=" + firstGamerScore +
+                ", secondGamer=" + secondGamer +
+                ", secondGamerScore=" + secondGamerScore +
+                '}';
     }
 }
