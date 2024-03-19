@@ -1,0 +1,14 @@
+Hierarchy
+
+Iterable
+    |
+    |
+    |
+Collection / Data Structure
+
+List, Map, Set, Queue, Stack
+
+List: ArrayList, Stack -> Vector, LinkedList
+
+
+Collection - INTERFACE, Collections - Utility Class (includes static methods)

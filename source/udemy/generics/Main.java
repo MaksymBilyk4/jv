@@ -11,6 +11,7 @@ public class Main {
 
     public static void main(String[] args) {
 
+
 //        Info<String> stringInfo = new Info<>("Hello");
 //        System.out.println(stringInfo);
 //        Info<Integer> integerInfo = new Info<>(369);
