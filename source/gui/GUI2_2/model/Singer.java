@@ -1,12 +1,11 @@
 package gui.GUI2_2.model;
 
-public abstract class Singer {
+public abstract class Singer implements Comparable<Singer> {
 
     private static int counter = 0;
 
     private String name;
     private int uniqueNumber;
-
 
 
     public Singer(String name) {
@@ -34,11 +33,12 @@ public abstract class Singer {
             song = new StringBuilder(singers[i].sing());
 
             for (int j = 0; j < song.length(); j++) {
-                if ((song.charAt(j) >= '1' && song.charAt(j) <= '9') && song.charAt(j) > maxDigit) maxDigit = song.charAt(j);
+                if ((song.charAt(j) >= '1' && song.charAt(j) <= '9') && song.charAt(j) > maxDigit)
+                    maxDigit = song.charAt(j);
 
                 if (
-                        ((song.charAt(j) >= 'A' && song.charAt(j) <= 'Z') ||  (song.charAt(j) >= 'a' && song.charAt(j) <= 'z')) &&
-                                song.charAt(j) >  maxChar
+                        ((song.charAt(j) >= 'A' && song.charAt(j) <= 'Z') || (song.charAt(j) >= 'a' && song.charAt(j) <= 'z')) &&
+                                song.charAt(j) > maxChar
                 ) maxChar = song.charAt(j);
 
                 currentSum = maxChar + maxDigit;
@@ -73,5 +73,21 @@ public abstract class Singer {
     @Override
     public String toString() {
         return "( " + this.uniqueNumber + " ) " + this.name + ": " + sing();
+    }
+
+    @Override
+    public int compareTo(Singer singer) {
+        if (this.sing().length() < singer.sing().length()) {
+            return 1;
+        } else if (this.sing().length() > singer.sing().length()) {
+            return -1;
+        } else {
+            int res = this.name.compareTo(singer.getName());
+            if (res == 0) {
+                return this.uniqueNumber - singer.getUniqueNumber();
+            } else {
+                return res;
+            }
+        }
     }
 }

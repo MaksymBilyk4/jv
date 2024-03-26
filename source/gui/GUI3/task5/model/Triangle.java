@@ -48,7 +48,7 @@ public class Triangle extends Figure implements Drawing {
 
     @Override
     public String toString() {
-        return this.name() + "\nLeft high: (" + this.getX() + "," + this.getY() + ")\nWidth: " + this.width + ". Height: " + this.height;
+        return "\n" + this.name() + "\nLeft high: (" + this.getX() + "," + this.getY() + ")\nWidth: " + this.width + ". Height: " + this.height;
     }
 
     @Override

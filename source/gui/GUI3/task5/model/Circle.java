@@ -36,7 +36,7 @@ public class Circle extends Figure implements Transfromation {
 
     @Override
     public String toString() {
-        return this.name() + "\n" + "Center -> (" + this.getX() + "," + this.getY() + ")\n" + "Radius - " + this.radius;
+        return "\n" + this.name() + "\n" + "Center -> (" + this.getX() + "," + this.getY() + ")\n" + "Radius - " + this.radius;
     }
 
     @Override
