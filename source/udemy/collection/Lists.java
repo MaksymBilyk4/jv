@@ -2,10 +2,9 @@ package udemy.collection;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
-public class Main {
+public class Lists {
 
     public static void main(String[] args) {
 
@@ -84,27 +83,6 @@ public class Main {
         System.out.println(Arrays.toString(objects1));
 
         List<Integer> ints = List.of(1,2,3); // !!!! IMMUTABLE
-
-        // ITERATOR================================================================================================
-
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-
-
-        ArrayList<String> data = new ArrayList<>();
-        data.add("Hello");
-        data.add("World");
-        data.add("Java");
-        data.add("C++");
-
-        Iterator<String> iterator = data.iterator();
-        while (iterator.hasNext()) {
-            System.out.println(iterator.next());
-        }
-
 
     }
 
