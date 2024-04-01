@@ -41,6 +41,19 @@ public class Main {
         strings.clear();
         strings.displayInfo();
         strings.displayList();
+
+        strings.addFirst("Hello");
+        strings.addFirst("World");
+        strings.addFirst("Back");
+        strings.addFirst("Bla bla bla");
+        strings.displayList();
+
+
+
+        for (String el : strings) {
+            System.out.println(el);
+        }
+
     }
 
 }

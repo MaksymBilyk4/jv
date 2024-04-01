@@ -1,10 +1,17 @@
 package datasctructures.list;
 
 
+import datasctructures.hashmap.BucketInstance;
+import datasctructures.hashmap.BucketItem;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Objects;
+import java.util.Spliterator;
+import java.util.function.Consumer;
 
 // basic operations only
-public class List<E> {
+public class List<E> implements BucketItem, Iterable<E> {
 
     private ListNode<E> head;
 
@@ -254,4 +261,47 @@ public class List<E> {
         this.tail = tail;
     }
 
+
+
+    @Override
+    public BucketInstance getBucketInstance() {
+        return BucketInstance.LIST;
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return new Iterator<E>() {
+            private ListNode<E> currentNode = head;
+
+            @Override
+            public boolean hasNext() {
+                return this.currentNode != null;
+            }
+
+            @Override
+            public E next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                E element = currentNode.getElement();
+                currentNode = currentNode.getNext();
+                return element;
+            }
+
+            @Override
+            public void remove() {
+                throw new UnsupportedOperationException("Remove not supported.");
+            }
+        };
+    }
+
+    @Override
+    public void forEach(Consumer<? super E> action) {
+        Iterable.super.forEach(action);
+    }
+
+    @Override
+    public Spliterator<E> spliterator() {
+        return Iterable.super.spliterator();
+    }
 }
