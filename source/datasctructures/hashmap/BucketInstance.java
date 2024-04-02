@@ -4,6 +4,8 @@ public enum BucketInstance {
 
     LIST,
 
-    ENTRY_NODE
+    ENTRY_NODE,
+
+    SET_NODE
 
 }
