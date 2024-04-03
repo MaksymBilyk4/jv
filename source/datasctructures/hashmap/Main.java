@@ -45,6 +45,8 @@ public class Main {
         System.out.println(map.remove("F"));
         System.out.println(Arrays.toString(map.getBuckets()));
         System.out.println(map.size());
+
+        System.out.println(Arrays.toString(map.keySet().getBuckets()));
     }
 
 }

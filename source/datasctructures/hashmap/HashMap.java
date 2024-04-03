@@ -1,5 +1,6 @@
 package datasctructures.hashmap;
 
+import datasctructures.hashSet.HashSet;
 import datasctructures.list.List;
 
 
@@ -130,7 +131,7 @@ public class HashMap<K, V> {
             }
 
         } else if (this.buckets[bucketIndex].getBucketInstance() == BucketInstance.LIST) {
-            List<EntryNode<K, V>> nodeList = (List<EntryNode<K,V>>) this.buckets[bucketIndex];
+            List<EntryNode<K, V>> nodeList = (List<EntryNode<K, V>>) this.buckets[bucketIndex];
             V returnValue = null;
             for (EntryNode<K, V> entry : nodeList) {
                 if (entry.getKey().hashCode() == key.hashCode() && entry.getKey().equals(key)) {
@@ -208,6 +209,26 @@ public class HashMap<K, V> {
 
     public BucketItem[] getBuckets() {
         return this.buckets;
+    }
+
+    public HashSet<K> keySet() {
+        HashSet<K> keySet = new HashSet<>();
+
+        for (BucketItem bucketItem : this.buckets) {
+            if (bucketItem != null) {
+                if (bucketItem.getBucketInstance() == BucketInstance.ENTRY_NODE) {
+                    EntryNode<K, V> entry = (EntryNode<K, V>) bucketItem;
+                    keySet.add(entry.getKey());
+                } else if (bucketItem.getBucketInstance() == BucketInstance.LIST) {
+                    List<EntryNode<K, V>> entryNodeList = (List<EntryNode<K, V>>) bucketItem;
+                    for (EntryNode<K, V> entry : entryNodeList) {
+                        keySet.add(entry.getKey());
+                    }
+                }
+            }
+        }
+
+        return keySet;
     }
 
     // ===============================================================================================================
