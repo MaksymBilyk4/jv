@@ -1,12 +1,9 @@
 package datasctructures.graph.noweight;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 // TODO BFS, DFS, find, path, path all, weighted graph impl
+
+import java.util.*;
 
 public class Graph<E> {
 
@@ -149,6 +146,93 @@ public class Graph<E> {
         return this.graph.containsKey(element) ? this.graph.get(element).getElement() : null;
     }
 
+    public void DFSWrap() {
+        HashSet<E> passed = new HashSet<>();
+
+        for (Map.Entry<E, GraphNode<E>> entry : this.graph.entrySet()) {
+            if (!passed.contains(entry.getValue().getElement())) DFS(entry.getValue().getElement(), passed);
+        }
+
+    }
+
+
+    public void DFS(E element, HashSet<E> passed) {
+        GraphNode<E> node = this.graph.get(element);
+        Stack<GraphNode<E>> stack = new Stack<>();
+        stack.push(node);
+
+        while (!stack.isEmpty()) {
+            node = stack.peek();
+            if (!passed.contains(node.getElement())) {
+                System.out.print(node.getElement() + " ");
+                passed.add(node.getElement());
+            }
+            boolean hasChildren = false;
+            for (Edge<E> edge : node.getEdges()) {
+                if (!passed.contains(edge.getAdjacentNode().getElement())) {
+                    stack.push(edge.getAdjacentNode());
+                    hasChildren = true;
+                    break;
+                }
+            }
+
+            if (!hasChildren) stack.pop();
+        }
+
+    }
+
+
+    public void DFSRecursiveWrap() {
+        HashSet<E> passed = new HashSet<>();
+
+        for (Map.Entry<E, GraphNode<E>> entry : this.graph.entrySet()) {
+            if (!passed.contains(entry.getValue().getElement())) DFSRecursive(entry.getValue().getElement(), passed);
+        }
+
+    }
+
+    public void DFSRecursive(E element, HashSet<E> passed) {
+        GraphNode<E> node = this.graph.get(element);
+
+        System.out.print(node.getElement() + " ");
+        passed.add(node.getElement());
+
+        for (Edge<E> edge : node.getEdges()) {
+            if (!passed.contains(edge.getAdjacentNode().getElement())) {
+                DFSRecursive(edge.getAdjacentNode().getElement(), passed);
+            }
+        }
+
+    }
+
+    public LinkedList<E> findPathWrap(E start, E end) {
+        HashSet<E> passed = new HashSet<>();
+        LinkedList<E> path = new LinkedList<>();
+        return this.findPath(start, end, passed, path).getKey();
+    }
+
+    public Map.Entry<LinkedList<E>, Boolean> findPath(E start, E end, HashSet<E> passed, LinkedList<E> path) {
+        if (start.equals(end)) {
+            path.addFirst(start);
+            return new EntryPath<E>(path, true);
+        }
+
+        GraphNode<E> startNode = this.graph.get(start);
+        GraphNode<E> endNode = this.graph.get(end);
+
+        passed.add(start);
+
+        for (Edge<E> edge : startNode.getEdges()) {
+            if (!passed.contains(edge.getAdjacentNode().getElement())) {
+                if (findPath(edge.getAdjacentNode().getElement(), end, passed, path).getValue()) {
+                    path.addFirst(start);
+                    return new EntryPath<>(path, true);
+                }
+            }
+        }
+
+        return new EntryPath<>(path, false);
+    }
 
     public HashMap<E, GraphNode<E>> getGraph() {
         return this.graph;
