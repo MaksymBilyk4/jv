@@ -1,9 +1,8 @@
 package datasctructures.graph;
 
-import datasctructures.graph.noweight.Edge;
 import datasctructures.graph.noweight.Graph;
+import datasctructures.graph.noweight.PathNode;
 
-import java.util.HashSet;
 import java.util.LinkedList;
 
 public class Main {
@@ -43,6 +42,13 @@ public class Main {
         path = graph.findPathWrap(7, 1);
         System.out.println();
         System.out.println(path);
+
+        graph.BFSWrap();
+
+        PathNode<Integer> pathNode = graph.findShortestPath(7, 1);
+        LinkedList<Integer> p = graph.extractPath(pathNode);
+
+        System.out.println(p);
 
     }
 

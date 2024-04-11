@@ -1,8 +1,6 @@
 package datasctructures.graph.noweight;
 
 
-// TODO BFS, DFS, find, path, path all, weighted graph impl
-
 import java.util.*;
 
 public class Graph<E> {
@@ -140,6 +138,64 @@ public class Graph<E> {
         }
 
         return children;
+    }
+
+    public LinkedList<E> extractPath(PathNode<E> pathNode) {
+        LinkedList<E> path = new LinkedList<>();
+        while (pathNode != null) {
+            path.addFirst(pathNode.getNode().getElement());
+            pathNode = pathNode.getParent();
+        }
+
+        return path;
+    }
+
+    public PathNode<E> findShortestPath(E start, E end) {
+        HashSet<E> passed = new HashSet<>();
+        LinkedList<PathNode<E>> queue = new LinkedList<>();
+        queue.add(new PathNode<>(this.graph.get(start), null));
+        passed.add(start);
+
+        while (!queue.isEmpty()) {
+            PathNode<E> pathNode = queue.removeFirst();
+            if (pathNode.getNode().getElement().equals(end)) return pathNode;
+            for (Edge<E> edge : pathNode.getNode().getEdges()) {
+                if (passed.contains(edge.getAdjacentNode().getElement())) continue;
+                if (edge.getAdjacentNode().getElement().equals(end))
+                    return new PathNode<>(edge.getAdjacentNode(), pathNode);
+                queue.addLast(new PathNode<>(edge.getAdjacentNode(), pathNode));
+                passed.add(pathNode.getNode().getElement());
+            }
+        }
+        return null;
+    }
+
+    public void BFSWrap() {
+        HashSet<E> passed = new HashSet<>();
+
+        for (Map.Entry<E, GraphNode<E>> entry : this.graph.entrySet()) {
+            if (!passed.contains(entry.getKey()))
+                BFS(entry.getValue(), passed);
+        }
+
+    }
+
+    public void BFS(GraphNode<E> node, HashSet<E> passed) {
+        Deque<GraphNode<E>> deque = new ArrayDeque<>();
+
+        deque.add(node);
+        while (!deque.isEmpty()) {
+            node = deque.removeFirst();
+            System.out.println(node.getElement());
+            passed.add(node.getElement());
+
+            for (Edge<E> edge : node.getEdges()) {
+                if (!passed.contains(edge.getAdjacentNode().getElement())) {
+                    deque.addLast(edge.getAdjacentNode());
+                }
+            }
+        }
+
     }
 
     public E get(E element) {
