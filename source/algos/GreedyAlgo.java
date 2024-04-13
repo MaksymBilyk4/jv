@@ -1,4 +1,4 @@
-package greedy;
+package algos;
 
 import java.util.*;
 
